@@ -111,6 +111,7 @@ pub fn build_nsattributes(
     }
 
     if pf_reqs.release_behavior != ReleaseBehavior::Flush {
+        dbg!(pf_reqs.release_behavior);
         return Err(CreationError::NoAvailablePixelFormat);
     }
 

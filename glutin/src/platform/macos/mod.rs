@@ -55,6 +55,9 @@ impl Context {
         pf_reqs: &PixelFormatRequirements,
         gl_attr: &GlAttributes<&Context>,
     ) -> Result<(winit::Window, Self), CreationError> {
+        dbg!(pf_reqs);
+        dbg!(gl_attr);
+
         let transparent = wb.window.transparent;
         let win = wb.build(el)?;
 
@@ -78,7 +81,11 @@ impl Context {
                     .initWithAttributes_(&attributes),
             );
             let pixel_format = match pixel_format.non_nil() {
-                None => return Err(CreationError::NoAvailablePixelFormat),
+                None => {
+                    dbg!(&attributes);
+                    dbg!(&gl_profile);
+                    return Err(CreationError::NoAvailablePixelFormat)
+                }
                 Some(pf) => pf,
             };
 
